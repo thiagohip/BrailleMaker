@@ -1,4 +1,4 @@
-associations = {
+{
     "!.png": "!",
     "a-acent.png": "á",
     "a-crase.png": "à",
@@ -36,5 +36,5 @@ associations = {
     "x.png": "x",
     "y.png": "y",
     "z.png": "z",
-    "space.png": " ",
+    "space.png": " "
 }

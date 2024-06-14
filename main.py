@@ -3,7 +3,6 @@ from src.Symbols import Symbol
 from src.Svg import Svg
 import tkinter as tk
 from tkinter import filedialog
-from tkinter import messagebox
 import os
 import shutil
 
@@ -15,7 +14,6 @@ HEIGHT = 60.0
 
 
 def CreateFinalImage(word):
-
     word_length = len(word)
     image_final = Image.new('RGBA', (0, 0), (0, 0, 0, 0))
     width = image_final.width
@@ -24,7 +22,7 @@ def CreateFinalImage(word):
     value = 20
 
     for i in range(word_length):
-        image_symbol = symbol.find(word[i])
+        image_symbol = Symbol.find(word[i])
 
         image_temp = Image.new('RGBA', (width + image_symbol.width, max(height, image_symbol.height)), (0, 0, 0, 0))
         image_temp.paste(image_final, (0, 0))
@@ -60,21 +58,17 @@ def SaveImagePNG():
 
 def SaveImageSVG():
     word = text_area.get().lower()
-    file_directory = filedialog.asksaveasfilename(defaultextension='.svg')
-    svg_image = svg.convert_text_to_svg(word)
+    file_directory = tk.filedialog.asksaveasfilename(defaultextension='.svg')
+    svg_image = Svg.convert_text_to_svg(word)
     with open(file_directory, "w") as file:
         file.write(svg_image)
 
 
-svg = Svg()
-symbol = Symbol()
 
-symbol.InitializeImages(path)
+Symbol.InitializeImages(path)
 
 window = tk.Tk()
 window.title('BrailleMaker')
-window.resizable(False, False)
-window.iconbitmap("src/labmaker.ico")
 window.geometry("640x180")
 image_created = False
 
@@ -96,5 +90,8 @@ button_save_svg.grid(column=0, row=2)
 button_save_svg.place(x=95, y=140)
 
 window.mainloop()
-if os.path.exists("temp/temp.png"):
-    os.remove("temp/temp.png")
+
+if os.path.exists("temp"):
+    if os.path.exists("temp/temp.png"):
+        os.remove("temp/temp.png")
+    os.rmdir("temp")

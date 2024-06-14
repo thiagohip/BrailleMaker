@@ -1,23 +1,28 @@
 from PIL import Image
-from asso import associations
 import os
-
+import json
 
 class Symbol:
 
     symbols = {}
 
-    def insert(self, character, image):
-        self.symbols[character] = image
+    @classmethod
+    def insert(cls, character, image):
+        cls.symbols[character] = image
 
-    def find(self, character):
-        return self.symbols[character]
+    @classmethod
+    def find(cls, character):
+        return cls.symbols[character]
 
-    def InitializeImages(self, path):
+    @classmethod
+    def InitializeImages(cls, path):
+        with open("./asso.json") as file:
+            associations = json.load(file)
+
         files = os.listdir(path)
         for i in files:
             symbol_name = i
             symbol_path = "Symbols/"+symbol_name
             image = Image.open(symbol_path)
             character = associations[symbol_name]
-            self.insert(character, image)
+            cls.insert(character, image)
