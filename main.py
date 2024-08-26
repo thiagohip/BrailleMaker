@@ -38,8 +38,7 @@ def ShowImage():
     global img_final
     img_final = tk.PhotoImage(file="temp/temp.png")
     label_image = tk.Label(window, image=img_final)
-    label_image.grid(column=0, row=1)
-    label_image.place(x=10, y=60)
+    label_image.place(x=20, y=80)
 
 
 def Convert():
@@ -69,7 +68,7 @@ Symbol.InitializeImages(path)
 
 window = tk.Tk()
 window.title('BrailleMaker')
-window.geometry("640x180")
+window.geometry("1280x180")
 image_created = False
 
 label = tk.Label(window, text='Palavra a ser transformada:')
@@ -78,17 +77,11 @@ button_convert = tk.Button(window, text='Converter', command=Convert)
 button_save_png = tk.Button(window, text='Salvar PNG', command=SaveImagePNG)
 button_save_svg = tk.Button(window, text='Salvar SVG', command=SaveImageSVG)
 
-label.grid(column=0, row=0)
-label.place(x=10, y=9)
-text_area.grid(column=1, row=0)
-text_area.place(x=160, y=9)
-button_convert.grid(column=2, row=0)
-button_convert.place(x=300, y=5)
-button_save_png.grid(column=0, row=2)
-button_save_png.place(x=10, y=140)
-button_save_svg.grid(column=0, row=2)
-button_save_svg.place(x=95, y=140)
-
+label.grid(column=0, row=0, padx=5)
+text_area.grid(column=1, row=0, padx=0)
+button_convert.grid(column=2, row=0, padx=5)
+button_save_png.place(x=20, y=30)
+button_save_svg.place(x=130, y=30)
 window.mainloop()
 
 if os.path.exists("temp"):
